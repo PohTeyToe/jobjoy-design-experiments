@@ -9,8 +9,5 @@
 */v3/screenshot-*.png
 */final/screenshot-*.png
 
-# Fonts — downloaded, not checked in
-fonts/*.woff2
-
 # Source PDF text dumps (intermediate)
 _source/
