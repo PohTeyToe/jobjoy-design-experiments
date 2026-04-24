@@ -1,0 +1,1 @@
+The IPP satellite ring is bottom-heavy — two satellites pair at the lower-left / lower-right corners while the top carries a single label, producing a visible asymmetry at the bottom edge that a true radial layout would have balanced.

@@ -1,0 +1,1 @@
+The IPP satellite labels are positioned by fixed `<foreignObject>` rectangles rather than angle-computed anchors, which leaves the left-column labels uncomfortably close to the page's inner edge and breaks the otherwise-precise radial symmetry.

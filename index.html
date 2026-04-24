@@ -1,0 +1,277 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>JobJoy Report — six-variant comparison</title>
+<style>
+  @import url("fonts/fonts.css");
+
+  :root {
+    --ink: oklch(0.22 0.02 60);
+    --muted: oklch(0.5 0.01 60);
+    --paper: oklch(0.97 0.005 80);
+    --panel: oklch(0.99 0.003 80);
+    --rule: oklch(0.88 0.008 60);
+    --accent: oklch(0.46 0.12 32);
+    --accent-soft: oklch(0.94 0.04 32);
+  }
+
+  * { box-sizing: border-box; }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: "Inter", system-ui, sans-serif;
+    font-size: 14px;
+    line-height: 1.5;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  header {
+    position: sticky;
+    top: 0;
+    background: var(--panel);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.8rem 1.5rem;
+    z-index: 10;
+  }
+  .header-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
+  .title-block h1 { margin: 0; font-family: "Source Serif 4", serif; font-size: 1.2rem; font-weight: 600; }
+  .title-block p { margin: 0; font-size: 0.78rem; color: var(--muted); }
+  .spacer { flex: 1; }
+
+  .variant-tabs { display: flex; gap: 0.25rem; margin-top: 0.75rem; flex-wrap: wrap; }
+  .tab {
+    font-family: "Inter", sans-serif; font-size: 0.85rem; font-weight: 500;
+    padding: 0.45rem 0.9rem; border: 1px solid var(--rule); background: transparent;
+    color: var(--ink); cursor: pointer; border-radius: 1px;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+  }
+  .tab:hover { background: var(--accent-soft); }
+  .tab.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .tab .kbd { font-size: 0.7rem; font-family: "IBM Plex Sans", monospace; opacity: 0.6; font-weight: 400; }
+  .tab .status { font-size: 0.7rem; padding: 0.05rem 0.4rem; }
+  .status.pass { background: oklch(0.92 0.06 150); color: oklch(0.3 0.1 150); }
+  .status.issues { background: oklch(0.94 0.05 50); color: oklch(0.4 0.1 40); }
+
+  .page-nav { display: flex; gap: 0.2rem; align-items: center; flex-wrap: wrap; }
+  .page-btn {
+    width: 2rem; height: 2rem; border: 1px solid var(--rule); background: transparent;
+    cursor: pointer; font-family: "Inter", sans-serif; font-size: 0.8rem; font-weight: 500;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .page-btn:hover { background: var(--accent-soft); }
+  .page-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+  .page-label { margin-left: 0.75rem; font-size: 0.85rem; color: var(--muted); min-width: 14rem; }
+  .page-label strong { color: var(--ink); font-weight: 500; }
+
+  .controls { display: flex; gap: 0.5rem; align-items: center; }
+  .control-btn {
+    font-family: "Inter", sans-serif; font-size: 0.8rem; font-weight: 500;
+    padding: 0.4rem 0.8rem; border: 1px solid var(--rule); background: transparent;
+    cursor: pointer; text-decoration: none; color: var(--ink);
+  }
+  .control-btn:hover { background: var(--accent-soft); }
+  .control-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+  main { flex: 1; padding: 1.5rem; display: flex; justify-content: center; align-items: flex-start; gap: 1.5rem; }
+  .viewer { background: white; border: 1px solid var(--rule); box-shadow: 0 2px 16px oklch(0 0 0 / 0.06); max-width: 100%; flex: 1 1 0; min-width: 0; }
+  .viewer img { display: block; width: 100%; height: auto; }
+  .viewer-header {
+    padding: 0.6rem 1rem; border-bottom: 1px solid var(--rule);
+    display: flex; justify-content: space-between; align-items: baseline; font-size: 0.8rem;
+  }
+  .viewer-header strong { font-weight: 600; font-family: "Source Serif 4", serif; font-size: 0.95rem; }
+  .viewer-header .voice { color: var(--muted); }
+  .viewer-missing { padding: 4rem 2rem; text-align: center; color: var(--muted); font-family: "Source Serif 4", serif; font-style: italic; }
+
+  .info-panel { background: var(--panel); border-top: 1px solid var(--rule); padding: 1rem 1.5rem; font-size: 0.82rem; color: var(--muted); }
+  .info-row { display: flex; gap: 2rem; flex-wrap: wrap; align-items: center; }
+  .hint { font-size: 0.75rem; color: var(--muted); }
+  .hint kbd {
+    font-family: "IBM Plex Sans", monospace; background: oklch(0.94 0.005 60);
+    border: 1px solid var(--rule); padding: 0.05rem 0.4rem; border-radius: 2px; font-size: 0.72rem;
+  }
+  a { color: var(--accent); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="header-row">
+    <div class="title-block">
+      <h1>JobJoy Report — Sample 1</h1>
+      <p>Six design variants · April 24, 2026</p>
+    </div>
+    <div class="spacer"></div>
+    <div class="page-nav" id="page-nav"></div>
+    <div class="page-label" id="page-label"></div>
+    <div class="controls">
+      <button class="control-btn" id="split-toggle" title="Toggle side-by-side (s)">Compare 2 ↔</button>
+      <a class="control-btn" id="pdf-link" href="#" target="_blank">Open PDF ↗</a>
+    </div>
+  </div>
+  <div class="variant-tabs" id="variant-tabs"></div>
+</header>
+
+<main id="main">
+  <div class="viewer" id="viewer-a">
+    <div class="viewer-header">
+      <strong id="va-name">—</strong>
+      <span class="voice" id="va-voice">—</span>
+    </div>
+    <div id="va-body"></div>
+  </div>
+  <div class="viewer" id="viewer-b" style="display: none;">
+    <div class="viewer-header">
+      <strong id="vb-name">—</strong>
+      <span class="voice" id="vb-voice">—</span>
+    </div>
+    <div id="vb-body"></div>
+  </div>
+</main>
+
+<div class="info-panel">
+  <div class="info-row">
+    <span class="hint">Keyboard: <kbd>1</kbd>–<kbd>6</kbd> switch variant · <kbd>←</kbd> <kbd>→</kbd> page · <kbd>s</kbd> compare mode</span>
+    <span class="spacer"></span>
+    <span><a href="COMPARISON.md">Full comparison with defects</a> · <a href="BRIEF.md">Brief</a></span>
+  </div>
+</div>
+
+<script>
+const VARIANTS = [
+  { id: 'faithful',       name: 'faithful',       voice: 'Word document, done correctly',    pages: 8,  status: 'issues', blocking: 1, key: '1' },
+  { id: 'recommended',    name: 'recommended',    voice: 'MGI long-form research',           pages: 8,  status: 'pass',   blocking: 0, key: '2' },
+  { id: 'impeccable',     name: 'impeccable',     voice: 'Pentagram / Phaidon',              pages: 9,  status: 'issues', blocking: 3, key: '3' },
+  { id: 'taste-frontend', name: 'taste-frontend', voice: 'Base / MoMA identity — sans only', pages: 11, status: 'issues', blocking: 2, key: '4' },
+  { id: 'huashu',         name: 'huashu',         voice: 'Roma Publications, minimal',       pages: 10, status: 'issues', blocking: 2, key: '5' },
+  { id: 'baseline',       name: 'baseline',       voice: 'Tufte marginalia, single-ink',     pages: 9,  status: 'pass',   blocking: 0, key: '6' },
+];
+
+const PAGE_LABELS = [
+  '1 · Cover',
+  '2 · Title / Colophon',
+  '3 · Table of Contents',
+  '4 · How to Read',
+  '5 · Elements of Key Success Factors',
+  '6 · Individual Passion Pattern (IPP)',
+  '7 · Personal Statement — opener',
+  '8 · Personal Statement — continued',
+  '9 · Personal Statement — cont.',
+  '10 · Personal Statement — cont.',
+  '11 · trailing page'
+];
+
+const state = {
+  variantA: 'recommended',
+  variantB: 'faithful',
+  page: 1,
+  split: false,
+};
+
+const maxPages = () => Math.max(...VARIANTS.map(v => v.pages));
+
+function clear(el) { while (el.firstChild) el.removeChild(el.firstChild); }
+
+function el(tag, attrs, text) {
+  const e = document.createElement(tag);
+  if (attrs) for (const k in attrs) {
+    if (k === 'class') e.className = attrs[k];
+    else if (k === 'onclick') e.onclick = attrs[k];
+    else e.setAttribute(k, attrs[k]);
+  }
+  if (text !== undefined) e.textContent = text;
+  return e;
+}
+
+function renderVariantTabs() {
+  const host = document.getElementById('variant-tabs');
+  clear(host);
+  VARIANTS.forEach(v => {
+    const active = state.split ? v.id === state.variantB : v.id === state.variantA;
+    const btn = el('button', { class: 'tab' + (active ? ' active' : ''), onclick: () => {
+      if (state.split) state.variantB = v.id; else state.variantA = v.id;
+      render();
+    }});
+    btn.appendChild(el('span', { class: 'kbd' }, v.key));
+    btn.appendChild(el('span', null, v.name));
+    const statusText = v.status === 'pass' ? 'pass' : v.blocking + ' blk';
+    btn.appendChild(el('span', { class: 'status ' + v.status }, statusText));
+    host.appendChild(btn);
+  });
+}
+
+function renderPageNav() {
+  const host = document.getElementById('page-nav');
+  clear(host);
+  const max = maxPages();
+  for (let i = 1; i <= max; i++) {
+    const btn = el('button', { class: 'page-btn' + (i === state.page ? ' active' : ''), onclick: () => { state.page = i; render(); } }, String(i));
+    host.appendChild(btn);
+  }
+  const label = document.getElementById('page-label');
+  clear(label);
+  label.appendChild(el('strong', null, PAGE_LABELS[state.page - 1] || ('Page ' + state.page)));
+}
+
+function renderViewer(slot, variantId) {
+  const v = VARIANTS.find(x => x.id === variantId);
+  document.getElementById(slot + '-name').textContent = v.name;
+  document.getElementById(slot + '-voice').textContent = v.voice;
+  const bodyEl = document.getElementById(slot + '-body');
+  clear(bodyEl);
+  if (state.page > v.pages) {
+    bodyEl.appendChild(el('div', { class: 'viewer-missing' }, 'This variant has ' + v.pages + ' pages — no page ' + state.page + '.'));
+  } else {
+    const img = el('img', { src: v.id + '/final/screenshot-' + state.page + '.png', alt: v.name + ' page ' + state.page, loading: 'eager' });
+    bodyEl.appendChild(img);
+  }
+}
+
+function renderPdfLink() {
+  const v = VARIANTS.find(x => x.id === state.variantA);
+  const link = document.getElementById('pdf-link');
+  link.setAttribute('href', v.id + '/final/preview.pdf#page=' + state.page);
+  link.textContent = 'Open ' + v.name + ' PDF ↗';
+}
+
+function renderSplitToggle() {
+  const btn = document.getElementById('split-toggle');
+  btn.classList.toggle('active', state.split);
+  btn.textContent = state.split ? 'Single view' : 'Compare 2 ↔';
+  document.getElementById('viewer-b').style.display = state.split ? 'block' : 'none';
+  document.getElementById('viewer-a').style.flex = state.split ? '1 1 0' : '1 1 80%';
+}
+
+function render() {
+  renderVariantTabs();
+  renderPageNav();
+  renderViewer('va', state.variantA);
+  if (state.split) renderViewer('vb', state.variantB);
+  renderPdfLink();
+  renderSplitToggle();
+}
+
+document.addEventListener('keydown', e => {
+  if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA') return;
+  const vByKey = VARIANTS.find(v => v.key === e.key);
+  if (vByKey) {
+    if (state.split) state.variantB = vByKey.id; else state.variantA = vByKey.id;
+    render();
+    e.preventDefault();
+    return;
+  }
+  if (e.key === 'ArrowRight' && state.page < maxPages()) { state.page++; render(); e.preventDefault(); }
+  if (e.key === 'ArrowLeft' && state.page > 1) { state.page--; render(); e.preventDefault(); }
+  if (e.key === 's' || e.key === 'S') { state.split = !state.split; render(); e.preventDefault(); }
+});
+
+document.getElementById('split-toggle').onclick = () => { state.split = !state.split; render(); };
+
+render();
+</script>
+
+</body>
+</html>

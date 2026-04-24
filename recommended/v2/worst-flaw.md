@@ -1,0 +1,1 @@
+The asymmetric cover is spare to the point of looking unfinished — a single hairline and a five-line block float in two-thirds empty paper with no secondary typographic anchor, which risks reading as a placeholder rather than a composed title page.

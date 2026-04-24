@@ -1,0 +1,16 @@
+# Rendered outputs are regenerable
+*/.playwright/
+*/v1/preview.pdf
+*/v2/preview.pdf
+*/v3/preview.pdf
+*/final/preview.pdf
+*/v1/screenshot-*.png
+*/v2/screenshot-*.png
+*/v3/screenshot-*.png
+*/final/screenshot-*.png
+
+# Fonts — downloaded, not checked in
+fonts/*.woff2
+
+# Source PDF text dumps (intermediate)
+_source/

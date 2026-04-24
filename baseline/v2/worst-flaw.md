@@ -1,0 +1,1 @@
+The IPP is still a 3x3 text matrix with geometric indicators glued to cell edges — defensibly Tufte small-multiples, but the brief's reference of "seven satellites orbiting one essential motivation" implies a radial arrangement that a grid cannot produce.

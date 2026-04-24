@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Design experiments — JobJoy Career Report</title>
+<style>
+  @import url("fonts/fonts.css");
+  :root {
+    --ink: oklch(0.22 0.02 60);
+    --paper: oklch(0.98 0.005 80);
+    --rule: oklch(0.85 0.01 60);
+    --accent: oklch(0.46 0.12 32);
+  }
+  html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink); }
+  body {
+    font-family: "Source Serif 4", Georgia, serif;
+    font-size: 16px;
+    line-height: 1.55;
+    max-width: 68rem;
+    margin: 3rem auto;
+    padding: 0 2rem;
+  }
+  h1 { font-family: "Inter", sans-serif; font-weight: 600; font-size: 1.8rem; letter-spacing: -0.01em; margin-bottom: 0.25rem; }
+  h2 { font-family: "Inter", sans-serif; font-weight: 500; font-size: 1.1rem; margin-top: 3rem; letter-spacing: 0.01em; text-transform: uppercase; color: oklch(0.42 0.01 60); }
+  .lead { font-family: "Inter", sans-serif; color: oklch(0.42 0.01 60); font-size: 0.95rem; margin-bottom: 2rem; }
+  .grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 1.5rem; }
+  .card {
+    border: 1px solid var(--rule);
+    background: #fff;
+    padding: 0;
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    transition: box-shadow 0.15s;
+  }
+  .card:hover { box-shadow: 0 2px 8px oklch(0.6 0 0 / 0.08); }
+  .card img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-bottom: 1px solid var(--rule);
+  }
+  .card .meta { padding: 0.9rem 1.1rem 1rem; }
+  .card .variant { font-family: "Inter", sans-serif; font-weight: 600; font-size: 1rem; margin: 0 0 0.25rem; }
+  .card .voice { font-family: "Inter", sans-serif; font-size: 0.82rem; color: oklch(0.42 0.01 60); margin: 0; }
+  .card .badge {
+    display: inline-block;
+    font-family: "Inter", sans-serif;
+    font-size: 0.7rem;
+    font-weight: 500;
+    padding: 0.15rem 0.5rem;
+    margin-left: 0.5rem;
+    letter-spacing: 0.03em;
+  }
+  .badge.pass { background: oklch(0.9 0.05 150); color: oklch(0.3 0.08 150); }
+  .badge.issues { background: oklch(0.94 0.03 50); color: oklch(0.4 0.1 40); }
+  table { border-collapse: collapse; margin-top: 1rem; font-family: "Inter", sans-serif; font-size: 0.9rem; }
+  th, td { text-align: left; padding: 0.4rem 0.8rem; border-bottom: 1px solid var(--rule); }
+  th { font-weight: 600; color: oklch(0.42 0.01 60); }
+  a { color: var(--accent); }
+  .foot { margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); font-family: "Inter", sans-serif; font-size: 0.85rem; color: oklch(0.42 0.01 60); }
+</style>
+</head>
+<body>
+
+<h1>Design experiments — JobJoy Career Report</h1>
+<p class="lead">Sample 1 · Six variants on a shared grid · April 24, 2026</p>
+
+<h2>Cover gallery</h2>
+<div class="grid">
+
+  <a class="card" href="faithful/final/preview.pdf">
+    <img src="faithful/final/screenshot-1.png" alt="faithful cover">
+    <div class="meta">
+      <p class="variant">faithful <span class="badge issues">1 blocking</span></p>
+      <p class="voice">Word document, done correctly. Tinos + Arimo, Sample 1 aesthetic literally.</p>
+    </div>
+  </a>
+
+  <a class="card" href="recommended/final/preview.pdf">
+    <img src="recommended/final/screenshot-1.png" alt="recommended cover">
+    <div class="meta">
+      <p class="variant">recommended <span class="badge pass">pass</span></p>
+      <p class="voice">Long-form research, MGI-grade. Source Serif 4 body + Inter UI, deep-blue accent.</p>
+    </div>
+  </a>
+
+  <a class="card" href="impeccable/final/preview.pdf">
+    <img src="impeccable/final/screenshot-1.png" alt="impeccable cover">
+    <div class="meta">
+      <p class="variant">impeccable <span class="badge issues">3 blocking</span></p>
+      <p class="voice">Pentagram / Phaidon. Display-forward. Consider v2 — round 3 regressed on markers.</p>
+    </div>
+  </a>
+
+  <a class="card" href="taste-frontend/final/preview.pdf">
+    <img src="taste-frontend/final/screenshot-1.png" alt="taste-frontend cover">
+    <div class="meta">
+      <p class="variant">taste-frontend <span class="badge issues">2 blocking</span></p>
+      <p class="voice">Base / MoMA identity book, sans-only. Ochre accent.</p>
+    </div>
+  </a>
+
+  <a class="card" href="huashu/final/preview.pdf">
+    <img src="huashu/final/screenshot-1.png" alt="huashu cover">
+    <div class="meta">
+      <p class="variant">huashu <span class="badge issues">2 blocking</span></p>
+      <p class="voice">Roma Publications. Structural minimal. IBM Plex + bone/red-ochre.</p>
+    </div>
+  </a>
+
+  <a class="card" href="baseline/final/preview.pdf">
+    <img src="baseline/final/screenshot-1.png" alt="baseline cover">
+    <div class="meta">
+      <p class="variant">baseline <span class="badge pass">pass</span></p>
+      <p class="voice">Tufte marginalia, single-ink. Markers live in the outer margin as a running index.</p>
+    </div>
+  </a>
+
+</div>
+
+<h2>Critic scores — final round</h2>
+<table>
+  <thead><tr><th>Variant</th><th>Round</th><th>Blocking</th><th>Major</th><th>Minor</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td>baseline</td><td>v2</td><td>0</td><td>4</td><td>7</td><td>pass</td></tr>
+    <tr><td>recommended</td><td>v3</td><td>0</td><td>3</td><td>5</td><td>pass</td></tr>
+    <tr><td>faithful</td><td>v3</td><td>1</td><td>3</td><td>6</td><td>final</td></tr>
+    <tr><td>taste-frontend</td><td>v3</td><td>2</td><td>1</td><td>5</td><td>final</td></tr>
+    <tr><td>huashu</td><td>v3</td><td>2</td><td>3</td><td>5</td><td>final</td></tr>
+    <tr><td>impeccable</td><td>v3</td><td>3</td><td>6</td><td>5</td><td>final</td></tr>
+  </tbody>
+</table>
+
+<h2>Read more</h2>
+<p><a href="COMPARISON.md">Full comparison with decision matrix</a> · <a href="BRIEF.md">Shared brief</a> · <a href="SAMPLE_1.md">Sample 1 source material</a> · <a href="CLEANUP.md">Post-decision cleanup</a></p>
+
+<p class="foot">Click any cover to open that variant's 7-page PDF.</p>
+
+</body>
+</html>

@@ -1,0 +1,1 @@
+The Personal Statement body is now set ragged-right instead of justified, which trades river risk for a visibly uneven right edge that reads softer than the display type's editorial ambition suggests.

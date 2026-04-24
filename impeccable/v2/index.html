@@ -1,0 +1,1051 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<title>JobJoy Report — Sample 1</title>
+<style>
+@import url("../../fonts/fonts.css");
+
+:root {
+  --accent: oklch(0.46 0.12 32);
+  --ink: oklch(0.22 0.012 40);
+  --ink-body: oklch(0.30 0.010 40);
+  --ink-mute: oklch(0.50 0.008 40);
+  --rule: oklch(0.22 0.012 40);
+  --paper: oklch(0.985 0.004 75);
+}
+
+@page { size: 8.5in 11in; margin: 0; }
+
+html, body { margin: 0; padding: 0; background: var(--paper); color: var(--ink-body); }
+
+body {
+  font-family: "Source Serif 4", Georgia, serif;
+  font-size: 10.5pt;
+  line-height: 13pt;
+  font-feature-settings: "onum" 1, "kern" 1, "liga" 1;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Numeral discipline: old-style in running text, lining + tabular in folios, TOC pg, captions */
+.ps-body, .howto-body, .elements-body {
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+.toc-folio, .tabular, .caption-numerals, .folio, .toc-list .pg, .toc-list .num,
+.marker, .chapter-num, .cover .foot .pg, .running-head {
+  font-variant-numeric: lining-nums tabular-nums;
+}
+
+.page {
+  position: relative;
+  width: 8.5in;
+  height: 11in;
+  page-break-after: always;
+  break-after: page;
+  overflow: hidden;
+  background: var(--paper);
+}
+.page:last-child { page-break-after: auto; }
+
+.recto { padding: 0.75in 1.25in 1in 0.75in; }
+.verso { padding: 0.75in 0.75in 1in 1.25in; }
+
+.folio {
+  position: absolute;
+  bottom: 0.5in;
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.folio.recto { left: auto; right: 1.25in; padding: 0; }
+.folio.verso { right: auto; left: 1.25in; padding: 0; }
+.folio .sep { display: inline-block; width: 0.75em; }
+
+.running-head {
+  position: absolute;
+  top: 0.5in;
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.running-head.recto { left: auto; right: 1.25in; padding: 0; }
+.running-head.verso { right: auto; left: 1.25in; padding: 0; }
+
+.marker {
+  font-family: "Inter", sans-serif;
+  font-size: 0.78em;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  color: var(--accent);
+  margin-right: 0.18em;
+  white-space: nowrap;
+}
+
+em, i { font-style: italic; }
+p { margin: 0; text-indent: 0; }
+p + p { margin-top: 13pt; }
+
+a { color: inherit; text-decoration: none; }
+
+/* ---------- COVER ---------- */
+.cover {
+  padding: 0.75in 1.25in 1in 0.75in;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto 1fr auto;
+  gap: 0;
+}
+.cover .topmark {
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  grid-row: 1;
+  align-self: start;
+  display: flex;
+  align-items: center;
+}
+.cover .topmark .bullet {
+  display: inline-block;
+  width: 6px; height: 6px;
+  background: var(--accent);
+  margin-right: 0.9em;
+}
+.cover .stack {
+  grid-row: 2;
+  align-self: end;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 0;
+  max-width: 6.6in;
+}
+.cover .rule-cover {
+  height: 0.5pt;
+  background: var(--ink);
+  width: 1.6in;
+  margin-bottom: 26pt;
+}
+.cover .line {
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  color: var(--ink);
+  margin: 0;
+  padding: 0;
+  letter-spacing: -0.028em;
+}
+.cover .line-title {
+  font-size: 128pt;
+  line-height: 0.90;
+}
+.cover .line-for {
+  font-size: 28pt;
+  line-height: 36pt;
+  font-style: italic;
+  color: var(--ink-mute);
+  letter-spacing: -0.012em;
+  margin-top: 8pt;
+}
+.cover .line-name {
+  font-size: 64pt;
+  line-height: 0.95;
+  color: var(--accent);
+  letter-spacing: -0.028em;
+  margin-top: 2pt;
+}
+.cover .line-by, .cover .line-date {
+  font-family: "Inter", sans-serif;
+  font-size: 10pt;
+  line-height: 15pt;
+  letter-spacing: 0.02em;
+  color: var(--ink);
+  font-weight: 400;
+}
+.cover .line-by { margin-top: 36pt; }
+.cover .line-date { margin-top: 2pt; }
+
+.cover .foot {
+  grid-row: 3;
+  align-self: end;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+
+/* ---------- TITLE / COLOPHON ---------- */
+.title-page {
+  display: grid;
+  grid-template-columns: 2.4in 1fr;
+  grid-template-rows: 1fr auto;
+  gap: 0 32pt;
+}
+.title-page .label {
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 13pt;
+}
+.title-page .block { align-self: end; }
+.title-page h1 {
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  font-size: 42pt;
+  line-height: 48pt;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  margin: 0 0 26pt 0;
+}
+.title-page h1 em { color: var(--accent); font-style: italic; white-space: nowrap; }
+.title-page .colophon {
+  grid-column: 1 / -1;
+  margin-top: 72pt;
+  display: grid;
+  grid-template-columns: 1.6in 1fr 1.6in;
+  gap: 26pt;
+  font-family: "Inter", sans-serif;
+  font-size: 8pt;
+  line-height: 13pt;
+  color: var(--ink-body);
+  border-top: 0.5pt solid var(--ink);
+  padding-top: 13pt;
+}
+.title-page .colophon h3 {
+  font-size: 7.25pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: var(--ink-mute);
+  margin: 0 0 6.5pt 0;
+}
+.title-page .colophon p { font-size: 8.5pt; line-height: 13pt; }
+.title-page .colophon .accent-swatch {
+  display: inline-block;
+  width: 10px; height: 10px;
+  background: var(--accent);
+  vertical-align: middle;
+  margin-right: 0.6em;
+  transform: translateY(-1px);
+}
+
+/* ---------- TOC ---------- */
+.toc-page .toc-head {
+  display: grid;
+  grid-template-columns: 2.25in 1fr;
+  gap: 32pt;
+  align-items: baseline;
+  margin-bottom: 52pt;
+}
+.toc-page .toc-head .label {
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.toc-page h2 {
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  font-size: 34pt;
+  line-height: 39pt;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  margin: 0;
+}
+.toc-page h2 em { font-style: italic; color: var(--accent); }
+
+.toc-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  counter-reset: toc;
+  border-top: 0.5pt solid var(--ink);
+}
+.toc-list li {
+  counter-increment: toc;
+  display: grid;
+  grid-template-columns: 0.55in 3.2in 1fr 0.5in;
+  gap: 18pt;
+  align-items: baseline;
+  padding: 13pt 0;
+  border-bottom: 0.5pt solid color-mix(in oklch, var(--ink) 25%, transparent);
+}
+.toc-list .num {
+  font-family: "Inter", sans-serif;
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+}
+.toc-list .title {
+  font-family: "Source Serif 4", serif;
+  font-size: 13pt;
+  line-height: 16pt;
+  color: var(--ink);
+  letter-spacing: -0.005em;
+  text-indent: 0;
+  hanging-punctuation: first;
+}
+.toc-list .desc {
+  font-family: "Inter", sans-serif;
+  font-size: 8pt;
+  line-height: 11pt;
+  color: var(--ink-mute);
+  letter-spacing: 0.01em;
+}
+.toc-list .pg {
+  font-family: "Inter", sans-serif;
+  font-size: 10pt;
+  color: var(--ink);
+  text-align: right;
+  letter-spacing: 0.02em;
+}
+
+/* ---------- HOW TO READ ---------- */
+.how-page {
+  display: grid;
+  grid-template-columns: 2.25in 1fr;
+  gap: 32pt;
+}
+.how-page .side {
+  border-top: 0.5pt solid var(--ink);
+  padding-top: 13pt;
+}
+.how-page .side .label {
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 13pt;
+}
+.how-page .side h2 {
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  font-size: 28pt;
+  line-height: 30pt;
+  letter-spacing: -0.018em;
+  color: var(--ink);
+  margin: 0 0 13pt 0;
+}
+.how-page .side h2 em { color: var(--accent); font-style: italic; }
+.how-page .side .note {
+  font-family: "Inter", sans-serif;
+  font-size: 8pt;
+  line-height: 12pt;
+  color: var(--ink-mute);
+}
+.how-page .body { max-width: 4.15in; }
+.how-page .body p {
+  font-size: 10.5pt;
+  line-height: 15.5pt;
+  color: var(--ink-body);
+  text-align: left;
+  hyphens: auto;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+.how-page .body p:first-child::first-line {
+  font-variant-caps: small-caps;
+  letter-spacing: 0.06em;
+  font-family: "Source Serif 4", serif;
+}
+
+/* ---------- ELEMENTS CHAPTER OPENER ---------- */
+.elements-page {
+  padding: 0.75in 1.25in 1in 0.75in;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+}
+.elements-page .chapter-mark {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: baseline;
+  gap: 18pt;
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.elements-page .chapter-mark .rule { height: 0.5pt; background: var(--ink); }
+.elements-page .chapter-num { color: var(--accent); font-weight: 500; }
+.elements-page .display {
+  align-self: end;
+  margin: 0;
+  padding-left: 0;
+  margin-right: -0.5in;
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  font-size: 120pt;
+  line-height: 0.92;
+  letter-spacing: -0.038em;
+  color: var(--ink);
+}
+.elements-page .display .line { display: block; }
+.elements-page .display .of {
+  font-style: italic;
+  color: var(--ink-mute);
+  font-weight: 400;
+  /* 1.333 ratio from 120pt display: 120 / 1.333 ≈ 90pt */
+  font-size: 90pt;
+  letter-spacing: -0.024em;
+}
+.elements-page .dek {
+  margin-top: 26pt;
+  display: grid;
+  grid-template-columns: 2.1in 1fr;
+  gap: 32pt;
+  border-top: 0.5pt solid var(--ink);
+  padding-top: 13pt;
+}
+.elements-page .dek .left {
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.elements-page .dek .right {
+  font-family: "Source Serif 4", serif;
+  font-size: 11pt;
+  line-height: 16pt;
+  color: var(--ink);
+  max-width: 4.2in;
+}
+.elements-page .dek .right em { color: var(--accent); font-style: italic; }
+
+/* ---------- ELEMENTS LIST ---------- */
+.elements-list-page {
+  display: grid;
+  grid-template-columns: 2.25in 1fr;
+  gap: 32pt;
+}
+.elements-list-page .side {
+  border-top: 0.5pt solid var(--ink);
+  padding-top: 13pt;
+}
+.elements-list-page .side .label {
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.elements-list-page .side h3 {
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  font-size: 18pt;
+  line-height: 22pt;
+  color: var(--ink);
+  margin: 13pt 0 0 0;
+}
+.elements-list-page .side h3 em { color: var(--accent); font-style: italic; }
+.elements-list-page ol {
+  list-style: none;
+  counter-reset: el;
+  margin: 0;
+  padding: 0;
+}
+.elements-list-page ol li {
+  counter-increment: el;
+  display: grid;
+  grid-template-columns: 0.45in 1fr;
+  gap: 14pt;
+  padding: 13pt 0;
+  border-top: 0.5pt solid color-mix(in oklch, var(--ink) 22%, transparent);
+  max-width: 4.5in;
+}
+.elements-list-page ol li:first-child { border-top: 0.5pt solid var(--ink); }
+.elements-list-page ol li::before {
+  content: "0" counter(el);
+  font-family: "Inter", sans-serif;
+  font-size: 8pt;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  color: var(--accent);
+  font-variant-numeric: lining-nums tabular-nums;
+  padding-top: 3pt;
+}
+.elements-list-page ol li h4 {
+  font-family: "Source Serif 4", serif;
+  font-weight: 600;
+  font-size: 12pt;
+  line-height: 15pt;
+  color: var(--ink);
+  margin: 0 0 4pt 0;
+}
+.elements-list-page ol li p {
+  font-family: "Source Serif 4", serif;
+  font-size: 9.5pt;
+  line-height: 13pt;
+  color: var(--ink-body);
+}
+
+/* ---------- IPP ---------- */
+.ipp-page {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0;
+}
+.ipp-page .head {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 24pt;
+  align-items: baseline;
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  border-bottom: 0.5pt solid var(--ink);
+  padding-bottom: 13pt;
+}
+.ipp-page .head .accent { color: var(--accent); font-weight: 500; }
+.ipp-page .head h2 {
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  font-size: 22pt;
+  line-height: 24pt;
+  letter-spacing: -0.012em;
+  color: var(--ink);
+  text-transform: none;
+  margin: 0;
+}
+.ipp-page .head h2 em { color: var(--accent); font-style: italic; }
+.ipp-wrap {
+  position: relative;
+  width: 6.5in;
+  height: 6.5in;
+  margin: 20pt auto 0 auto;
+}
+.ipp-wrap svg { width: 100%; height: 100%; display: block; }
+
+.ipp-foot {
+  margin-top: 13pt;
+  border-top: 0.5pt solid var(--ink);
+  padding-top: 13pt;
+  display: grid;
+  grid-template-columns: 2.25in 1fr;
+  gap: 32pt;
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.ipp-foot .right {
+  text-transform: none;
+  letter-spacing: 0;
+  font-family: "Source Serif 4", serif;
+  font-size: 9.5pt;
+  line-height: 13pt;
+  color: var(--ink-body);
+  font-style: italic;
+}
+
+/* ---------- PS OPENER ---------- */
+.ps-opener {
+  display: grid;
+  grid-template-columns: 2.25in 1fr;
+  gap: 32pt;
+}
+.ps-opener .side {
+  border-top: 0.5pt solid var(--ink);
+  padding-top: 13pt;
+  font-family: "Inter", sans-serif;
+}
+.ps-opener .side .label {
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+  margin-bottom: 8pt;
+}
+.ps-opener .side .kicker {
+  font-family: "Source Serif 4", serif;
+  font-size: 10pt;
+  line-height: 14pt;
+  color: var(--ink-mute);
+  font-style: italic;
+}
+.ps-opener .body h2 {
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  font-size: 72pt;
+  line-height: 0.92;
+  letter-spacing: -0.03em;
+  color: var(--ink);
+  margin: 0 0 13pt 0;
+}
+.ps-opener .body h2 em { color: var(--accent); font-style: italic; }
+.ps-opener .body .subhead {
+  font-family: "Inter", sans-serif;
+  font-size: 10pt;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink);
+  margin: 0 0 26pt 0;
+  max-width: 4.3in;
+}
+.ps-opener .body .subhead .iam { color: var(--accent); margin-right: 0.6em; }
+.ps-opener .body .rule { height: 0.5pt; background: var(--ink); width: 4.3in; margin-bottom: 13pt; }
+.ps-opener .body p {
+  font-family: "Source Serif 4", serif;
+  font-size: 10.5pt;
+  line-height: 15.5pt;
+  color: var(--ink-body);
+  max-width: 4.3in;
+  text-align: left;
+  hyphens: auto;
+  widows: 3;
+  orphans: 3;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+.ps-opener .body p:first-of-type::first-letter {
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  font-size: 56pt;
+  line-height: 46pt;
+  float: left;
+  padding: 4pt 8pt 0 0;
+  color: var(--accent);
+}
+
+/* ---------- PS CONT ---------- */
+.ps-cont {
+  display: grid;
+  grid-template-columns: 2.25in 1fr;
+  gap: 32pt;
+}
+.ps-cont .side {
+  border-top: 0.5pt solid var(--ink);
+  padding-top: 13pt;
+  font-family: "Inter", sans-serif;
+  font-size: 7.5pt;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--ink-mute);
+}
+.ps-cont .side .section-n {
+  color: var(--accent);
+  font-size: 22pt;
+  font-family: "Source Serif 4", serif;
+  font-weight: 400;
+  letter-spacing: -0.01em;
+  text-transform: none;
+  display: block;
+  margin-bottom: 13pt;
+}
+.ps-cont .body { max-width: 4.3in; }
+.ps-cont .body p {
+  font-family: "Source Serif 4", serif;
+  font-size: 10.5pt;
+  line-height: 15.5pt;
+  color: var(--ink-body);
+  text-align: left;
+  hyphens: auto;
+  widows: 3;
+  orphans: 3;
+  font-variant-numeric: oldstyle-nums proportional-nums;
+}
+.ps-cont .body p + p { margin-top: 11pt; }
+.ps-cont .body .coda {
+  margin-top: 26pt;
+  padding-top: 13pt;
+  border-top: 0.5pt solid var(--ink);
+  font-style: italic;
+  color: var(--ink);
+}
+
+</style>
+</head>
+<body>
+
+<!-- 1. COVER -->
+<section class="page cover">
+  <div class="topmark"><span class="bullet"></span>JobJoy &nbsp;·&nbsp; Career Assessment</div>
+
+  <div class="stack">
+    <div class="rule-cover"></div>
+    <div class="line line-title">JobJoy Report</div>
+    <div class="line line-for">For</div>
+    <div class="line line-name">Sample&nbsp;1</div>
+    <div class="line line-by">By: George Dutch, MA, CCDP</div>
+    <div class="line line-date">Date: April 24, 2026</div>
+  </div>
+
+  <div class="foot">
+    <span>Smyth</span>
+    <span class="pg">01</span>
+  </div>
+</section>
+
+<!-- 2. TITLE / COLOPHON -->
+<section class="page verso title-page">
+  <div class="label">Colophon</div>
+  <div class="block">
+    <h1>A book about&nbsp;<em>right&nbsp;work</em>, written in the voice of its reader.</h1>
+  </div>
+
+  <div class="colophon">
+    <div>
+      <h3>Typefaces</h3>
+      <p><strong>Source Serif 4</strong>, designed by Frank Grießhammer, sets the body and display.</p>
+      <p><strong>Inter</strong>, designed by Rasmus Andersson, carries labels, folios, and numerical markers.</p>
+    </div>
+    <div>
+      <h3>Composition</h3>
+      <p>Set on a thirteen-point baseline grid at a measure of sixty to sixty-eight characters. US Letter. Asymmetric recto-verso margins. Old-style numerals in running text; lining, tabular numerals in figures and folios.</p>
+      <p>Smart punctuation throughout; no double spaces; en and em dashes used to their proper ends.</p>
+    </div>
+    <div>
+      <h3>Pressmark</h3>
+      <p><span class="accent-swatch"></span>A single accent, oxide red, carries no more than ten percent of any page.</p>
+      <p>Printed from structured data. One of six design editions prepared for George Dutch.</p>
+    </div>
+  </div>
+
+  <div class="folio verso">Smyth<span class="sep"></span>02</div>
+</section>
+
+<!-- 3. TOC -->
+<section class="page recto toc-page">
+  <div class="running-head recto">JobJoy Report · Sample 1</div>
+  <div class="toc-head">
+    <div class="label">Contents</div>
+    <h2>Seven stations<br/>toward your <em>right work</em>.</h2>
+  </div>
+
+  <ol class="toc-list">
+    <li>
+      <span class="num">I.</span>
+      <span class="title">Cover</span>
+      <span class="desc">Frontispiece</span>
+      <span class="pg">01</span>
+    </li>
+    <li>
+      <span class="num">II.</span>
+      <span class="title">Colophon &amp; Title</span>
+      <span class="desc">Composition, typefaces, pressmark</span>
+      <span class="pg">02</span>
+    </li>
+    <li>
+      <span class="num">III.</span>
+      <span class="title">Contents</span>
+      <span class="desc">The document you are reading</span>
+      <span class="pg">03</span>
+    </li>
+    <li>
+      <span class="num">IV.</span>
+      <span class="title">How to Read This Report</span>
+      <span class="desc">Orientation for the reader</span>
+      <span class="pg">04</span>
+    </li>
+    <li>
+      <span class="num">V.</span>
+      <span class="title">Elements of Key Success Factors</span>
+      <span class="desc">Six definitions in their order of use</span>
+      <span class="pg">05</span>
+    </li>
+    <li>
+      <span class="num">VI.</span>
+      <span class="title">Individual Passion Pattern</span>
+      <span class="desc">Radial diagram of essential motivation</span>
+      <span class="pg">06</span>
+    </li>
+    <li>
+      <span class="num">VII.</span>
+      <span class="title">Personal Statement</span>
+      <span class="desc">Your story, in your vocabulary</span>
+      <span class="pg">07</span>
+    </li>
+  </ol>
+
+  <div class="folio recto">Smyth<span class="sep"></span>03</div>
+</section>
+
+<!-- 4. HOW TO READ -->
+<section class="page verso how-page">
+  <div class="running-head verso">Orientation</div>
+  <div class="side">
+    <div class="label">Section IV</div>
+    <h2>How to read <em>this report</em>.</h2>
+    <div class="note">Read once through without a pen. Return, on a second or third pass, to the passages that arrest you — yours is the final authority on what rings true.</div>
+  </div>
+
+  <div class="body howto-body">
+    <p>Each of us is born with natural talents and abilities. When we honour and make use of these talents, we feel good about ourselves. When we do not, we feel unfulfilled. By identifying what motivates us, what our talents are, and how to employ them, we can target work environments and careers with which we are compatible and subsequently experience &ldquo;JobJoy.&rdquo;</p>
+
+    <p>Your JobJoy Report, which identifies your Key Success Factors, is an excellent tool to enable you to achieve a deep sense of job satisfaction in your life. It starts with a definition of your Natural Talents, then describes the elements that trigger your talents: Preferred Subject Matter, Motivating Situations, Natural Relating Style. These four facets come together to serve your Essential Motivation. See your Essential Motivation chart. This is the essence of what you do in terms of your right work when you are doing what you enjoy most and doing it well.</p>
+
+    <p>Using the facts, people, and events of your stories, I build a case toward these conclusions. I provide a Personal Statement in which I re-tell your story with the view of painting a more accurate and reliable word picture of who you are in terms of your right work. The numbers in your statement correspond on the opposite page with definitions of your Key Success Factors. This allows us to build a strong vocabulary to communicate to potential employers the job duties and conditions that make you a motivated, productive employee. Finally, I provide Suggestions of jobfits and outline strategies to move you into a better jobfit.</p>
+
+    <p>On reading your report, you may find some things resonate well while others do not. Make note of these and send any comments to me. Often, people obtain the best use of their JobJoy Report after reading it several times to understand the true impact of its revelations. Careful reflection and validation of its contents can take time. Many people refer to their Report often, using it for clarification and inspiration. Enjoy your Report.</p>
+  </div>
+
+  <div class="folio verso">Smyth<span class="sep"></span>04</div>
+</section>
+
+<!-- 5. ELEMENTS OPENER -->
+<section class="page elements-page">
+  <div class="chapter-mark">
+    <span class="chapter-num">Chapter V</span>
+    <span class="rule"></span>
+    <span>Six definitions</span>
+  </div>
+
+  <h1 class="display">
+    <span class="line">Elements</span>
+    <span class="line"><span class="of">of your</span></span>
+    <span class="line">Key Success</span>
+    <span class="line">Factors.</span>
+  </h1>
+
+  <div class="dek">
+    <div class="left">The vocabulary</div>
+    <div class="right">Six terms carry the pattern. Natural Talents, Preferred Subject Matter, Motivating Situations, and Natural Relating Style together serve <em>Essential Motivation</em>. The last, What You Do Next, belongs to you.</div>
+  </div>
+</section>
+
+<!-- 5b. ELEMENTS LIST -->
+<section class="page verso elements-list-page">
+  <div class="running-head verso">Chapter V · Elements</div>
+
+  <div class="side">
+    <div class="label">Definitions 01 &mdash; 06</div>
+    <h3>Read these once, then return to them <em>after</em> the statement.</h3>
+  </div>
+
+  <div class="elements-body">
+    <ol>
+      <li>
+        <div>
+          <h4>Natural Talents</h4>
+          <p>What do you tend to do naturally and easily, that you find yourself doing almost without thinking or planning to do it, and that you always enjoy? You could call these your natural talents. There are many different kinds of natural talents that people have related to learning, evaluating, organizing, planning, communicating, influencing, observing, doing, developing, and more. When you use your natural talents as the basis for your job, then your job becomes a more enjoyable part of your life.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>Preferred Subject Matter</h4>
+          <p>What and whom do you enjoy working with the most? Your Preferred Subject Matter is the combination of people, information, and modalities that you are most happy to deal with and which motivates you to do your best.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>Motivating Situations</h4>
+          <p>The situations that turn you into a motivated person, or the conditions that stimulate you to achieve, including: the circumstances that trigger your involvement, how the activity is structured, what job circumstances stimulate you, what kind of recognition motivates you, what is the end use or result.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>Natural Relating Style</h4>
+          <p>The way in which you prefer to relate to others as you use your Natural Talents to accomplish your Essential Motivation &mdash; your most comfortable way to relate with other people in terms of Personality Style, Relationship Style, Relationship Type, natural Role, and how you prefer to be Managed.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>Essential Motivation</h4>
+          <p>The singular, distinguishing, or characteristic result that drives all the other parts of your pattern. It is the central purpose you seek to achieve.</p>
+        </div>
+      </li>
+      <li>
+        <div>
+          <h4>What You Do Next</h4>
+          <p>These are the things you must do to create the unique work that is yours. Do what you love. The money will follow.</p>
+        </div>
+      </li>
+    </ol>
+  </div>
+
+  <div class="folio verso">Smyth<span class="sep"></span>05</div>
+</section>
+
+<!-- 6. IPP -->
+<section class="page recto ipp-page">
+  <div class="running-head recto">Chapter VI · Individual Passion Pattern</div>
+
+  <div class="head">
+    <span class="accent">Chapter VI</span>
+    <h2>Your <em>Individual Passion Pattern</em>.</h2>
+    <span>Plate I</span>
+  </div>
+
+  <div class="ipp-wrap">
+    <svg viewBox="0 0 800 800" xmlns="http://www.w3.org/2000/svg" aria-label="Individual Passion Pattern diagram">
+      <defs>
+        <marker id="tri" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M 0 0 L 10 5 L 0 10 z" fill="oklch(0.22 0.012 40)"/>
+        </marker>
+      </defs>
+
+      <circle cx="400" cy="400" r="360" fill="none" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" stroke-opacity="0.18"/>
+      <circle cx="400" cy="400" r="230" fill="none" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" stroke-opacity="0.22"/>
+      <circle cx="400" cy="400" r="95"  fill="none" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" stroke-opacity="0.55"/>
+
+      <line x1="400" y1="190" x2="400" y2="290" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" marker-end="url(#tri)"/>
+      <line x1="564" y1="269" x2="486" y2="334" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" marker-end="url(#tri)"/>
+      <line x1="605" y1="447" x2="507" y2="423" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" marker-end="url(#tri)"/>
+      <line x1="491" y1="589" x2="443" y2="499" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" marker-end="url(#tri)"/>
+      <line x1="309" y1="589" x2="357" y2="499" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" marker-end="url(#tri)"/>
+      <line x1="195" y1="447" x2="293" y2="423" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" marker-end="url(#tri)"/>
+      <line x1="236" y1="269" x2="314" y2="334" stroke="oklch(0.22 0.012 40)" stroke-width="0.5" marker-end="url(#tri)"/>
+
+      <circle cx="400" cy="400" r="95" fill="oklch(0.985 0.004 75)" stroke="oklch(0.46 0.12 32)" stroke-width="0.5"/>
+      <text x="400" y="388" text-anchor="middle" font-family="Inter" font-size="9" letter-spacing="2.4" fill="oklch(0.46 0.12 32)" font-weight="500">ESSENTIAL MOTIVATION</text>
+      <foreignObject x="315" y="394" width="170" height="80">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Source Serif 4',serif;font-size:9.2pt;line-height:11pt;color:oklch(0.22 0.012 40);text-align:center;font-style:italic;">
+          Engage in the process of discovering, building, and developing a creative project.
+        </div>
+      </foreignObject>
+
+      <foreignObject x="310" y="80" width="180" height="110">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Inter',sans-serif;text-align:center;">
+          <div style="font-size:7pt;letter-spacing:.22em;color:oklch(0.46 0.12 32);font-weight:500;font-variant-numeric:lining-nums tabular-nums;">01 · END RESULT</div>
+          <div style="font-family:'Source Serif 4',serif;font-size:10pt;line-height:13pt;color:oklch(0.22 0.012 40);margin-top:4px;font-style:italic;">Finished Product</div>
+        </div>
+      </foreignObject>
+
+      <foreignObject x="580" y="150" width="210" height="140">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Inter',sans-serif;text-align:left;">
+          <div style="font-size:7pt;letter-spacing:.22em;color:oklch(0.46 0.12 32);font-weight:500;font-variant-numeric:lining-nums tabular-nums;">02 · SUBJECT MATTER</div>
+          <div style="font-family:'Source Serif 4',serif;font-size:9pt;line-height:12pt;color:oklch(0.22 0.012 40);margin-top:4px;">
+            Sensory: Visual · People: Groups · Tangibles: Physical, Manual · Mechanisms: Proficiency
+          </div>
+        </div>
+      </foreignObject>
+
+      <foreignObject x="620" y="395" width="170" height="80">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Inter',sans-serif;text-align:left;">
+          <div style="font-size:7pt;letter-spacing:.22em;color:oklch(0.46 0.12 32);font-weight:500;font-variant-numeric:lining-nums tabular-nums;">03 · TALENTS · DOING</div>
+          <div style="font-family:'Source Serif 4',serif;font-size:10pt;line-height:13pt;color:oklch(0.22 0.012 40);margin-top:4px;font-style:italic;">
+            Physically, Manually
+          </div>
+        </div>
+      </foreignObject>
+
+      <foreignObject x="510" y="610" width="220" height="90">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Inter',sans-serif;text-align:left;">
+          <div style="font-size:7pt;letter-spacing:.22em;color:oklch(0.46 0.12 32);font-weight:500;font-variant-numeric:lining-nums tabular-nums;">04 · TALENTS · DEVELOPING</div>
+          <div style="font-family:'Source Serif 4',serif;font-size:10pt;line-height:13pt;color:oklch(0.22 0.012 40);margin-top:4px;font-style:italic;">
+            By Designing, Building
+          </div>
+        </div>
+      </foreignObject>
+
+      <foreignObject x="70" y="610" width="220" height="90">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Inter',sans-serif;text-align:right;">
+          <div style="font-size:7pt;letter-spacing:.22em;color:oklch(0.46 0.12 32);font-weight:500;font-variant-numeric:lining-nums tabular-nums;">05 · TALENTS · CREATING</div>
+          <div style="font-family:'Source Serif 4',serif;font-size:10pt;line-height:13pt;color:oklch(0.22 0.012 40);margin-top:4px;font-style:italic;">
+            By Imagining
+          </div>
+        </div>
+      </foreignObject>
+
+      <foreignObject x="10" y="385" width="180" height="100">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Inter',sans-serif;text-align:right;">
+          <div style="font-size:7pt;letter-spacing:.22em;color:oklch(0.46 0.12 32);font-weight:500;font-variant-numeric:lining-nums tabular-nums;">06 · RELATING STYLE</div>
+          <div style="font-family:'Source Serif 4',serif;font-size:9pt;line-height:12pt;color:oklch(0.22 0.012 40);margin-top:4px;">
+            Influencer, Motivator · Solo
+          </div>
+        </div>
+      </foreignObject>
+
+      <foreignObject x="10" y="150" width="220" height="140">
+        <div xmlns="http://www.w3.org/1999/xhtml" style="font-family:'Inter',sans-serif;text-align:right;">
+          <div style="font-size:7pt;letter-spacing:.22em;color:oklch(0.46 0.12 32);font-weight:500;font-variant-numeric:lining-nums tabular-nums;">07 · RECOGNITION</div>
+          <div style="font-family:'Source Serif 4',serif;font-size:10pt;line-height:13pt;color:oklch(0.22 0.012 40);margin-top:4px;font-style:italic;">
+            Audiences, Viewers, Listeners
+          </div>
+        </div>
+      </foreignObject>
+
+      <text x="400" y="770" text-anchor="middle" font-family="Inter" font-size="7" letter-spacing="2.4" fill="oklch(0.46 0.12 32)" font-weight="500">+  MOTIVATING SITUATIONS</text>
+      <text x="400" y="788" text-anchor="middle" font-family="Source Serif 4" font-size="9" fill="oklch(0.30 0.010 40)" font-style="italic">Goal and Objective · Social · Group, Team · Travel · Creative · Outdoors, Nature</text>
+    </svg>
+  </div>
+
+  <div class="ipp-foot">
+    <div>Plate I · IPP</div>
+    <div class="right">Seven satellites feed a single center. Arrows point inward to indicate the direction of service &mdash; each facet exists to advance the essential motivation at the core. A bonus chip, Motivating Situations, sits below the figure rather than competing for an eighth ray.</div>
+  </div>
+
+  <div class="folio recto">Smyth<span class="sep"></span>06</div>
+</section>
+
+<!-- 7a. PS OPENER -->
+<section class="page verso ps-opener">
+  <div class="running-head verso">Chapter VII · Personal Statement</div>
+
+  <div class="side">
+    <div class="label">Section VII</div>
+    <div class="kicker">The numbered markers in the running text, <span class="marker">(1)</span>&ndash;<span class="marker">(16)</span>, cite the vocabulary of Chapter V. Read once without chasing them.</div>
+  </div>
+
+  <div class="body ps-body">
+    <h2>Personal <em>Statement.</em></h2>
+    <div class="subhead"><span class="iam">I am&nbsp;:</span> A builder &amp; developer of creative projects.</div>
+    <div class="rule"></div>
+    <p>I like to put together the various parts of a creative project. <span class="marker">(1)</span>&#8201;And I love developing skills that facilitate my ability to build creative projects. This natural inclination showed up early in life.</p>
+    <p>I remember having a very vivid imagination and could entertain myself for hours with drawing or building forts. I could draw dinosaurs and played Robin Hood and cowboys. I enjoyed using my hands and imagination to create. <span class="marker">(2)</span>&#8201;For example, I built with Lego and Kenex as a kid. I usually would follow the directions in the Lego box to build the design on the box. I found it more enjoyable to follow the instruction with Lego but would build creatively whatever I wanted with Kenex. <span class="marker">(3)</span>&#8201;I have enjoyed building with Lego and Kenex as an adult but less as a regular hobby and more of a nostalgic good time &mdash; but I still get a kick out of seeing a finished product result from my creative efforts.</p>
+  </div>
+
+  <div class="folio verso">Smyth<span class="sep"></span>07</div>
+</section>
+
+<!-- 7b. PS CONT -->
+<section class="page recto ps-cont">
+  <div class="running-head recto">Chapter VII · Personal Statement (continued)</div>
+
+  <div class="side">
+    <div>Personal Statement</div>
+    <span class="section-n">VII <em style="color:oklch(0.46 0.12 32);font-style:italic;">· ii</em></span>
+    <div>Continuation</div>
+  </div>
+
+  <div class="body ps-body">
+    <p>I&rsquo;ve always been drawn to visual material, including colours, design, and drawing. For example, in grade&nbsp;3 I wrote a book about a travelling bear for fun and drew all the pictures (had recently learned about author-illustrators). My teacher was so impressed she made photocopies and had it laminated and bound so that future kids in her class could read it. In grade&nbsp;5, we had a project to paint a picture of a building. My painting reflected a talent and was chosen to be displayed with an extremely select few students from the school district, hung in the mayoral office of Victoria. Grade&nbsp;12 was the first and only time I ever took an art class and I made two distinct pieces that were particularly good. <span class="marker">(4)</span>&#8201;I enjoy subject matter that is visual in nature, including the dynamics of form, line, colour, and contrast.</p>
+
+    <p>But I was especially drawn to movies. Amazingly, I made my first movie at 6 or 7 y.o. with my dad behind the camera because I was too young to operate it. I told him what to shoot and how to narrate it. It was about a dinosaur attacking a city and we used toys to make it. Equally amazing, I made my second movie at 8 y.o., &ldquo;The Wild Adventures of Sheriff Jane,&rdquo; starring my 6 y.o. sister, my younger cousins, my dad, aunt, and grandparents. My grandma entered it into a local film festival for fun when I was 12 y.o. and it won audience favourite.</p>
+
+    <p>I didn&rsquo;t have a script but I knew how I wanted the story to go; I knew what every scene should be or look like before we shot it. I made all the props like a stagecoach and bank teller bars. <span class="marker">(5)</span>&#8201;I got my family to dress up in their &ldquo;costumes&rdquo; and would block out the scene and tell them what to say before I rolled the camera. We shot it in scene order so we wouldn&rsquo;t have to edit it. I liked seeing my vision come to life. <span class="marker">(6)</span></p>
+
+    <p>This was me in action. I love to explore and try new things which go beyond the current limits of my knowledge or experience. It usually leads to some kind of vision or goal for something I want to build or develop. It could be a big thing like a movie or a small thing like a painting easel. But, when I have a vision for a project, I can approach it from multiple angles then jump right in and actually get my hands on to whatever objects or materials or processes I need to make my vision or goal into a finished product.</p>
+
+    <p>I went on to make many small films through my teens. In grade&nbsp;9, I discovered that the Victoria Film Festival had a youth category and I would make at least three short films that would show in the festival over the course of my high school years. I would do most of the creative and production work, including editing, which was my favourite activity. <span class="marker">(7)</span>&#8201;I have a knack for developing my creative projects by giving the thing its shape or form.</p>
+
+    <p>These early years of my life reveal so much about my motivational pattern. I thrive in an open-ended environment that inspires and encourages creativity, where people focus their energy or efforts on producing distinctive and unique objects or ideas. <span class="marker">(8)</span>&#8201;I respond to a clearly defined or predetermined end, whether the goal is set by me or others.</p>
+
+    <p>I loved making people laugh. I loved the attention and later the praise that came with being funny or clever. I enjoyed being funny &ldquo;on the fly.&rdquo; <span class="marker">(9)</span>&#8201;I liked being in front of an audience. I think my natural personality is a performer. I like to make speeches, be on stage, or give presentations of any kind. I like to influence and motivate others.</p>
+
+    <p>Although I performed in many of my high schools&rsquo; musicals and plays from grades 10&ndash;12, my favourite drama project was The Laramie Project in Grade&nbsp;11. It felt fun to build something with a group, to run lines, to take directors&rsquo; notes, to make it as good as we could. I remember performing and how it felt to be in front of the audience, working together with your classmates so closely. <span class="marker">(10)</span>&#8201;I really enjoy working with and through groups of people.</p>
+
+    <p>My mom put my sister and I in camp when we were 9 and 11. I found a community there that would keep me going back until I was old enough to work there. <span class="marker">(11)</span>&#8201;I do best when I&rsquo;m in an environment where there is some freedom to talk and interact and make new friends. But also the outdoors. <span class="marker">(12)</span>&#8201;Because I like to do things physically and manually, the outdoors makes it easier to use my physical abilities because it requires them.</p>
+
+    <p>The camp experience allowed me to test my mettle even as a young kid. I liked feeling proficient at survival type activities, like making shelters for overnights and building fires, orienteering, feeling physically challenged. <span class="marker">(13)</span>&#8201;I love to develop my knowledge or skill to the point of proficiency then demonstrate my competency or capability by solving problems, producing results, or advising others.</p>
+
+    <p>The summer I was 16, we went on a 25-day out-trip where we started kayaking the Gulf Islands, canoeing the Campbell Lake system, and hiking to the peak of Mt.&nbsp;Elkhorn. We had to rely on each other and often were with each other in very deep and desperate moments, navigating not just the land but our own emotional teenage landscapes. <span class="marker">(14)</span>&#8201;I function best within the context of a group, team, or organization that I identify with, or shares my values or enthusiasm for a certain experience.</p>
+
+    <p>I really do like to explore and break through the existing limits of my experience and travelling allows for that. Driving to Arizona and back in less than a week with my best friend at 23 in 2012 was a highlight for me. It felt like a big adventure, seeing places and things we&rsquo;d never seen before. It felt like freedom. <span class="marker">(15)</span></p>
+
+    <p>Maybe I&rsquo;m usually happiest going solo, completely in charge, making all the decisions. I find myself resisting outside influence, and do not feel comfortable on teams or in partnerships unless I can maintain personal autonomy. I liked the sense of adventure and felt brave to be alone, like I was tough and capable. <span class="marker">(16)</span>&#8201;As a creative person, I am resourceful and self-contained and find that creativity increases with freedom.</p>
+
+    <p class="coda">I&rsquo;m at another crossroads and feel like I&rsquo;m being boxed in by social and personal limitations. I need to explore again, recover that sense of adventure, get back to my essential motivation &mdash; that sense of freedom that comes with using my talents and proficiencies to explore and build and develop a creative project.</p>
+  </div>
+
+  <div class="folio recto">Smyth<span class="sep"></span>08</div>
+</section>
+
+</body>
+</html>

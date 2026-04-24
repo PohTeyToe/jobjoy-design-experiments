@@ -1,0 +1,1 @@
+The page-5 A-head to B-head ratio is a compromised 2.5 rather than the brief's prescribed perfect-fourth 1.333, because at 9.5pt body a strict 1.333 chain (body 9.5 -> B 12.7 -> A 16.9) collapses the display head to a size that can't carry the chapter opener.

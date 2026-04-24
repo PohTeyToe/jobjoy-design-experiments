@@ -1,0 +1,1 @@
+The IPP satellites are not truly radial — the seven nodes sit in grid corners rather than on an actual circle, so the "arrows pointing inward" reading depends on the reader's goodwill more than on the geometry.

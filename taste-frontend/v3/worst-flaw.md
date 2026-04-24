@@ -1,0 +1,1 @@
+The PS subhead "A Builder and Developer of Creative Projects" sits at 16pt regular weight directly under a 27pt h1 "Personal Statement", and the `I Am` eyebrow label to its left is heavily tracked caps — the two typographic voices collide without a clear hierarchy separator, so the page opens on a fussy three-element stack instead of a single confident statement.

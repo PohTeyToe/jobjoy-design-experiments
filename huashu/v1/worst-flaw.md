@@ -1,0 +1,1 @@
+The IPP satellite labels are anchored with hard pixel offsets to the stage edges rather than to true radial positions around the arrow endpoints, so on render they sit slightly out of geometric sympathy with the seven hairlines they annotate.

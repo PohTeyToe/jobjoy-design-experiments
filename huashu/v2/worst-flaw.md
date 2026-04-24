@@ -1,0 +1,1 @@
+The IPP center block sits on an opaque bone fill to mask the spoke ends, which reads as a typographic device but leaves a faint rectangular silhouette where the bone swatch meets the surrounding bone paper under certain screen gammas.

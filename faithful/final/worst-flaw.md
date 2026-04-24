@@ -1,0 +1,3 @@
+# Worst remaining flaw — faithful v3
+
+**Pages 7–8 body is set left-aligned (ragged right) rather than justified.** Sample 1's Personal Statement is set justified in the George Dutch original, and a "faithful" variant should mirror that. The current rag creates visually uneven right margins that a Word-faithful mimic ought to suppress. It was left ragged deliberately in v2 to avoid Chromium's weak justification engine opening ugly river gaps between words in a narrow 6.5in measure at 10.5pt, but the cost is a visible departure from the source. Next pass should switch to `text-align: justify` with `hyphens: none` preserved, accept mild spacing variation, and spot-check for rivers on the tightest lines.

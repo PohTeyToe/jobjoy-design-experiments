@@ -1,0 +1,35 @@
+# Critic report — taste-frontend v1
+
+## Blocking defects
+
+- [page 1] Cover wording diverges from SAMPLE_1.md. Required: "JobJoy Report / For / Sample 1 / By: George Dutch, MA, CCDP / Date: April 24, 2026". Variant renders display title as "JobJoy Report." (with a trailing period that is not in the spec) and restructures the rest into "PREPARED FOR / Sample 1 / BY / George Dutch, MA, CCDP / DATE / April 24, 2026 / FIRST EDITION / OTTAWA · CANADA". The eyebrow "JOBJOY / VOCATIONAL ASSESSMENT" and "FIRST EDITION", "OTTAWA · CANADA" are invented copy. Cover wording is called out as blocking in the critic checklist.
+- [page 6] IPP arrows are missing. The brief (and SAMPLE_1.md) require inward-pointing arrows from each of the 7 satellites to the center. Screenshot 6 shows only thin radial lines with decorative `›` / `‹` text glyphs placed beside labels — there are no arrowheads rendered on the geometry itself, and the chevron glyphs sit next to the eyebrows, not on the line termini. "IPP arrows not pointing inward" is listed as blocking.
+- [page 6] IPP center copy is wrong. SAMPLE_1.md specifies "Engage in process of discovering, building & developing a creative project". Variant renders "Engage in a process of discovering, building & developing a creative project" (inserted article "a"). Verbatim Essential Motivation copy is load-bearing.
+- [page 3] Table of Contents introduces sections that are not in the required section order. Required order is 7 sections: Cover, Title/Colophon, TOC, How to Read, Elements of Your Key Success Factors, IPP, Personal Statement. The variant TOC lists "03 Natural Talents, Subject Matter, Situations", "04 Essential Motivation", "07 What You Do Next" as separate sections — these are subcomponents of Elements, not top-level sections. "Section order changed" is blocking per checklist.
+- [page 7] Personal Statement subhead rendered as "I am: a builder and developer of creative projects." (sentence case, trailing period). SAMPLE_1.md verbatim: "I AM: A Builder and Developer of Creative Projects" (small-caps/title case, no terminal period). Verbatim Personal Statement wording is required.
+- [page 2] Straight apostrophe in colophon text: "JobJoy's" renders with a curly apostrophe in most spots, but "Junior Analyst" is wrapped in curly quotes ("Junior Analyst") — acceptable — however the colophon body contains "oklch(0.98 0.008 80)" with normal parentheses and an ASCII space, and the display title line "JobJoy Report — Sample 1" uses an em dash correctly. After recheck, the sample-1 label "Sample 1" and surname "Smyth" are handled — no straight-quote hits found in the HTML. Retracted: this item is NOT a defect. (Left as a no-op line; treat as resolved.)
+
+## Major defects
+
+- [page 5] Elements chapter opener shows only definitions 01–04 visible in the screenshot crop; definitions 05 (Essential Motivation) and 06 (What You Do Next) required by SAMPLE_1.md are not visible on this page and the TOC shows no continuation page allocated for Elements (jumps from 05 Elements to 05 Natural Talents, Subject Matter, Situations and then to 05 Essential Motivation — conflating separate sections). Either Elements is truncated at 4 of 6 definitions, or sections are merged in a way the TOC contradicts.
+- [page 1] Display title "JobJoy Report." sits as a two-line wrap ("JobJoy" / "Report.") at ~108pt. The break mid-title-phrase with the period stranded at line two creates a typographic orphan of sorts; at a trim of 8.5", the display measure is forced and the title could have been set in one line or balanced more carefully.
+- [page 6] IPP geometry: the satellite labels are unevenly distributed — four on the right cluster (SUBJECT MATTER, DOING, DEVELOPING, CREATING) versus four on the left (MOTIVATING SITUATIONS, RECOGNITION, RELATING STYLE, plus END RESULT top). The lines cross behind the center block (RELATING STYLE's line passes through the ESSENTIAL MOTIVATION paragraph text, producing a line crossing the body copy). That is a geometry failure, not merely aesthetics.
+- [page 3] TOC: page numbers given are 04, 05, 05, 05, 06, 07, 09 — three sections all claim page 05, which cannot be correct for a printed book. Lining-figure TOC with duplicated folios reads as a bug.
+- [page 5] Body measure on Elements page appears notably narrow — definitions wrap at roughly 48–54 characters based on visible line breaks (e.g. "that stimulate you to achieve, including:"), outside the 60–68 CPL floor stated in the shared spec.
+- [pages 7–9] Personal Statement: measure on the opener (screenshot 7) is extremely narrow — the text column looks set around 3.5–4 inches wide, well below 60 CPL floor. Continuation pages (screenshots 8–9) appear wider but inconsistent measure across the Personal Statement is a book-design defect.
+- [pages 7, 8] Personal Statement body color: body runs look darker than the 28–32% gray target; type color reads closer to near-black on warm paper, breaking the shared spec body type-color window.
+
+## Minor defects
+
+- [page 2] Colophon eyebrow "COLOPHON" sits far from the body block — the horizontal whitespace between label and block is ~1.5× the column width of the block itself, creating a disconnected pair rather than a rigid colophon grid.
+- [page 3] TOC display line "A report in seven movements." — the period at the end of a display head on a TOC is a stylistic tic, and "seven movements" editorializes a spec that names the sections differently.
+- [page 4] "How to read this report." display head carries a trailing period; SAMPLE_1.md heading is "How to read this report" (no terminal period).
+- [page 6] IPP labels mix arrow-like glyphs `›` (leading on left-side labels) and `‹` (trailing on right-side labels) — the typographic intent is clear but these are stylistic substitutes for the required inward arrows, not actual arrows; at minimum they are inconsistent with the Essential Motivation label which has no chevron at all.
+- [page 6] Essential Motivation paragraph is set at display weight beside the central label but runs 4 lines long — at this setting it becomes a second body block rather than a center-of-diagram anchor, and a radial line passes through it.
+- [pages 7–9] Running footers not clearly visible in screenshot crops — the folio+Smyth mark specified ("Smyth <page#>") may be present in HTML but is either set too light or cropped; visually unverifiable.
+- [page 9] Final paragraph ends mid-sentence at screenshot crop ("I identify with, or") suggesting either a page break mid-paragraph or a widowed line; the last word of a paragraph landing alone on its final line is a widow risk at this measure.
+- [pages 5, 7] Numeral style — eyebrow labels use lining 01, 02, 03 and inline Personal Statement markers use lining 01–16; body copy uses lining digits inline ("grade 12", "age 23", "9 and 11"). Brief says "old-style for body, lining for tabular — pick and hold". Body uses lining everywhere, which is a defensible pick-and-hold for a sans-only variant but worth flagging.
+
+## Summary
+
+5 blocking, 7 major, 7 minor. Verdict: needs revision.

@@ -1,0 +1,1 @@
+The Personal Statement drop-cap "I" is a narrow glyph, so its float-left metrics leave a visibly awkward gap between it and the following word on the first line — a known weakness of CSS `::first-letter` with tall, narrow caps that no amount of padding tuning fully eliminates.

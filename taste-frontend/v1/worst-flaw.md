@@ -1,0 +1,1 @@
+The IPP center block occupies so much of the canvas that the 0.5pt connector lines only traverse a short distance before meeting the satellites, which weakens the diagrammatic read and makes the composition feel crowded rather than radial.

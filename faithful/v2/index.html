@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8">
+<title>JobJoy Report — Sample 1 — faithful v2</title>
+<style>
+  @import url("../../fonts/fonts.css");
+
+  @page { size: Letter; margin: 1in; }
+
+  html, body { margin: 0; padding: 0; }
+  body {
+    font-family: "Tinos", "Times New Roman", Times, serif;
+    font-size: 12pt;
+    line-height: 1.5;
+    color: #111;
+    hyphens: none;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  .page {
+    position: relative;
+    width: 6.5in;
+    height: 9in;
+    page-break-after: always;
+    page-break-inside: avoid;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  .page:last-child { page-break-after: auto; }
+
+  h1, h2, h3 {
+    font-family: "Arimo", Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    text-align: center;
+    margin: 0;
+    color: #111;
+  }
+
+  .footer {
+    position: absolute;
+    left: 0;
+    bottom: 0.12in;
+    font-family: "Tinos", Times, serif;
+    font-size: 11pt;
+    color: #111;
+  }
+
+  p { margin: 0 0 10pt 0; text-align: left; orphans: 3; widows: 3; }
+
+  /* ---------- Page 1: Cover ---------- */
+  .cover .block {
+    position: absolute;
+    left: 0; right: 0;
+    top: 3.1in;
+    text-align: center;
+    font-family: "Tinos", Times, serif;
+  }
+  .cover .title {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 32pt;
+    letter-spacing: 0.01em;
+    margin-bottom: 36pt;
+  }
+  .cover .for, .cover .by, .cover .date {
+    font-size: 14pt;
+    line-height: 1.7;
+  }
+  .cover .name {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 20pt;
+    margin: 6pt 0 28pt 0;
+  }
+
+  /* ---------- Page 2: Title / colophon ---------- */
+  .title-page .tp-head {
+    text-align: center;
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 22pt;
+    margin-top: 2.4in;
+  }
+  .title-page .tp-sub {
+    text-align: center;
+    font-family: "Tinos", Times, serif;
+    font-style: italic;
+    font-size: 13pt;
+    margin-top: 6pt;
+    margin-bottom: 52pt;
+  }
+  .colophon {
+    font-family: "Tinos", Times, serif;
+    font-size: 10.5pt;
+    line-height: 1.5;
+    color: #222;
+    text-align: center;
+    margin: 0 auto;
+    max-width: 4.6in;
+  }
+  .colophon .rule {
+    width: 1.25in;
+    height: 0;
+    border-top: 0.5pt solid #111;
+    margin: 0 auto 10pt auto;
+  }
+  .colophon .label {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 9pt;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    margin-bottom: 8pt;
+  }
+
+  /* ---------- Page 3: TOC ---------- */
+  .toc h1 { font-size: 18pt; margin-bottom: 24pt; }
+  .toc ol {
+    list-style: none;
+    padding: 0;
+    margin: 0 0.35in;
+    font-family: "Tinos", Times, serif;
+    font-size: 12pt;
+  }
+  .toc li {
+    display: flex;
+    align-items: baseline;
+    margin-bottom: 13pt;
+  }
+  .toc .num {
+    width: 0.35in;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+  .toc .lbl {
+    flex: 0 0 auto;
+    padding-right: 0.08in;
+  }
+  .toc .dots {
+    flex: 1 1 auto;
+    overflow: hidden;
+    white-space: nowrap;
+    letter-spacing: 2pt;
+    color: #444;
+    transform: translateY(-2pt);
+    margin: 0 0.05in;
+  }
+  .toc .folio {
+    flex: 0 0 auto;
+    font-variant-numeric: lining-nums tabular-nums;
+  }
+
+  /* ---------- Page 4: How to Read ---------- */
+  .how h1 { font-size: 16pt; margin-bottom: 18pt; }
+
+  /* ---------- Page 5: Elements opener ---------- */
+  .elements h1 { font-size: 16pt; margin-bottom: 18pt; }
+  .elements ol {
+    padding-left: 0.3in;
+    margin: 0;
+    font-family: "Tinos", Times, serif;
+  }
+  .elements li {
+    margin-bottom: 10pt;
+    line-height: 1.45;
+    text-align: left;
+  }
+  .elements li strong {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+  }
+
+  /* ---------- Page 6: IPP diagram ---------- */
+  .ipp h1 { font-size: 16pt; margin-bottom: 6pt; }
+  .ipp .ipp-sub {
+    text-align: center;
+    font-family: "Tinos", Times, serif;
+    font-style: italic;
+    font-size: 11pt;
+    margin-bottom: 10pt;
+    color: #333;
+  }
+  .ipp .stage {
+    position: relative;
+    width: 6.5in;
+    height: 7.5in;
+  }
+  .ipp .box {
+    position: absolute;
+    border: 1pt solid #111;
+    background: #fff;
+    padding: 6pt 8pt;
+    box-sizing: border-box;
+    font-family: "Tinos", Times, serif;
+    font-size: 9pt;
+    line-height: 1.3;
+  }
+  .ipp .box .hd {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 9pt;
+    text-align: center;
+    margin-bottom: 3pt;
+  }
+  .ipp .box .num {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 8pt;
+    float: right;
+  }
+  .ipp .center {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    border: 1.5pt solid #111;
+  }
+  .ipp .center .hd {
+    font-size: 9.5pt;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .ipp .center .val {
+    font-family: "Tinos", Times, serif;
+    font-weight: 400;
+    font-size: 10pt;
+    text-align: center;
+    line-height: 1.3;
+  }
+  .ipp svg.arrows {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 0;
+  }
+  .ipp .box { z-index: 1; }
+
+  /* ---------- Pages 7 & 8: Personal Statement ---------- */
+  .ps h1 { font-size: 16pt; margin-bottom: 4pt; }
+  .ps .ps-sub {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 12pt;
+    text-align: left;
+    margin: 10pt 0 10pt 0;
+  }
+  .ps p {
+    font-size: 10.5pt;
+    line-height: 1.4;
+    margin-bottom: 7pt;
+    text-align: left;
+    text-align-last: left;
+    hyphens: none;
+  }
+  .ps .mk {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 10pt;
+  }
+  .ps .cont-head {
+    font-family: "Arimo", Arial, sans-serif;
+    font-weight: 700;
+    font-size: 10.5pt;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    text-align: left;
+    margin: 0 0 14pt 0;
+    padding-bottom: 6pt;
+    border-bottom: 0.5pt solid #111;
+  }
+</style>
+</head>
+<body>
+
+<!-- PAGE 1 — COVER -->
+<section class="page cover">
+  <div class="block">
+    <div class="title">JobJoy Report</div>
+    <div class="for">For</div>
+    <div class="name">Sample 1</div>
+    <div class="by">By: George Dutch, MA, CCDP</div>
+    <div class="date">Date: April 24, 2026</div>
+  </div>
+</section>
+
+<!-- PAGE 2 — TITLE / COLOPHON -->
+<section class="page title-page">
+  <div class="tp-head">Key Success Factors</div>
+  <div class="tp-sub">A vocational assessment prepared by JobJoy</div>
+  <div class="colophon">
+    <div class="rule"></div>
+    <div class="label">Colophon</div>
+    <div>
+      Body text is set in Tinos, an OFL-licensed typeface metrically compatible with Times New Roman. Headings are set in Arimo, an OFL-licensed typeface metrically compatible with Arial. Both drawn by Steve Matteson for the Google Croscore family. Body 12&nbsp;pt on 18&nbsp;pt leading; running footer 11&nbsp;pt.
+    </div>
+    <div style="margin-top: 10pt;">
+      &#169; 2026 JobJoy. Report format developed by George&nbsp;Dutch, MA, CCDP.
+    </div>
+  </div>
+  <div class="footer">Smyth&ensp;2</div>
+</section>
+
+<!-- PAGE 3 — TOC -->
+<section class="page toc">
+  <h1>Contents</h1>
+  <ol>
+    <li><span class="num">I.</span><span class="lbl">How to Read This Report</span><span class="dots">..............................................................................................................</span><span class="folio">4</span></li>
+    <li><span class="num">II.</span><span class="lbl">Elements of Your Key Success Factors</span><span class="dots">..............................................................................................................</span><span class="folio">5</span></li>
+    <li><span class="num">III.</span><span class="lbl">Individual Passion Pattern</span><span class="dots">..............................................................................................................</span><span class="folio">6</span></li>
+    <li><span class="num">IV.</span><span class="lbl">Personal Statement</span><span class="dots">..............................................................................................................</span><span class="folio">7</span></li>
+  </ol>
+  <div class="footer">Smyth&ensp;3</div>
+</section>
+
+<!-- PAGE 4 — HOW TO READ -->
+<section class="page how">
+  <h1>How to Read This Report</h1>
+  <p>Each of us is born with natural talents and abilities. When we honour and make use of these talents, we feel good about ourselves. When we do not, we feel unfulfilled. By identifying what motivates us, what our talents are, and how to employ them, we can target work environments and careers with which we are compatible and subsequently experience &#8220;JobJoy&#8221;.</p>
+  <p>Your JobJoy Report, which identifies your Key Success Factors, is an excellent tool to enable you to achieve a deep sense of job satisfaction in your life. It starts with a definition of your Natural Talents, then describes and defines the key elements that need to be in place to trigger your talents: Preferred Subject Matter, Motivating Situations, Natural Relating Style. These four facets then come together to serve your Essential Motivation. See your Essential Motivation chart. This is the essence of what you do in terms of your right work when you are doing what you enjoy most and doing it well.</p>
+  <p>Using the facts, people and events of your stories, I build a case towards these conclusions. I provide a Personal Statement in which I re-tell your story with the view of painting a more accurate and reliable word picture of who and what you are in terms of your right work. The numbers in your statement correspond on the opposite page with definitions of your Key Success Factors. This allows us to build a strong vocabulary to communicate with clarity and confidence to potential employers the job duties and conditions that make you a motivated and productive employee. Finally, I provide Suggestions of jobfits and outline some strategies to move you from where you are now into a better jobfit.</p>
+  <p>On reading your report, you may find some things resonate well while others do not. Make note of these and send any comments to myself. Often, people obtain the best use of their JobJoy Report after reading it several times to fully understand the true impact of its revelations. Careful reflection and validation of its contents can take time. Many people will refer to their Report often, using it for clarification and inspiration. Enjoy your Report!</p>
+  <div class="footer">Smyth&ensp;4</div>
+</section>
+
+<!-- PAGE 5 — ELEMENTS -->
+<section class="page elements">
+  <h1>Elements of Your Key Success Factors</h1>
+  <ol>
+    <li><strong>Natural Talents</strong>&nbsp;&#8212; What do you tend to do naturally and easily, that you find yourself doing almost without thinking or planning to do it, and that you always enjoy? You could call these your natural talents. There are many different kinds of natural talents that people have related to learning, evaluating, organizing, planning, communicating, influencing, observing, doing, developing, and more. When you use your natural talents as the basis for your job, then your job becomes a more enjoyable part of your life.</li>
+    <li><strong>Preferred Subject Matter</strong>&nbsp;&#8212; What and whom do you enjoy working with the most? Your Preferred Subject Matter is the combination of people, information, and modalities that you are most happy to deal with and which motivates you to do your best.</li>
+    <li><strong>Motivating Situations</strong>&nbsp;&#8212; The situations that turn you into a motivated person, or the conditions that stimulate you to achieve, including: the circumstances that trigger your involvement, how the activity is structured, what job circumstances stimulate you, what kind of recognition motivates you, what is the end use or result.</li>
+    <li><strong>Natural Relating Style</strong>&nbsp;&#8212; The way in which you prefer to relate to others as you use your Natural Talents to accomplish your Essential Motivation, your most comfortable way to relate with other people in terms of Personality Style, Relationship Style, Relationship Type, natural Role, and how you prefer to be Managed.</li>
+    <li><strong>Essential Motivation</strong>&nbsp;&#8212; The singular, distinguishing, or characteristic result that drives all the other parts of your pattern. It is the central purpose you seek to achieve.</li>
+    <li><strong>What You Do Next</strong>&nbsp;&#8212; These are the things you must do to create the unique work that is yours. Do what you love. The money will follow.</li>
+  </ol>
+  <div class="footer">Smyth&ensp;5</div>
+</section>
+
+<!-- PAGE 6 — IPP DIAGRAM -->
+<section class="page ipp">
+  <h1>Individual Passion Pattern</h1>
+  <div class="ipp-sub">Essential Motivation &amp; seven satellites &#8212; arrows point inward</div>
+  <div class="stage">
+    <svg class="arrows" viewBox="0 0 650 750" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="8" markerHeight="8" orient="auto-start-reverse">
+          <path d="M0,0 L10,5 L0,10 z" fill="#111"/>
+        </marker>
+      </defs>
+      <g stroke="#111" stroke-width="1" fill="none" marker-end="url(#ah)">
+        <line x1="325" y1="130" x2="325" y2="297"/>
+        <line x1="545" y1="175" x2="418" y2="305"/>
+        <line x1="560" y1="375" x2="418" y2="375"/>
+        <line x1="545" y1="590" x2="418" y2="445"/>
+        <line x1="325" y1="625" x2="325" y2="453"/>
+        <line x1="105" y1="590" x2="232" y2="445"/>
+        <line x1="90" y1="375" x2="232" y2="375"/>
+        <line x1="105" y1="175" x2="232" y2="305"/>
+      </g>
+    </svg>
+
+    <div class="box center" style="left: 2.35in; top: 3.05in; width: 1.80in; height: 1.50in;">
+      <div class="hd">Essential Motivation</div>
+      <div class="val">Engage in process of discovering, building &amp; developing a creative project</div>
+    </div>
+
+    <div class="box" style="left: 2.55in; top: 0.30in; width: 1.40in; height: 0.85in;">
+      <span class="num">1</span><div class="hd">End Result</div>Finished Product
+    </div>
+    <div class="box" style="left: 4.55in; top: 0.30in; width: 1.75in; height: 1.30in;">
+      <span class="num">2</span><div class="hd">Subject Matter</div>Sensory: Visual &#8226; People: Groups &#8226; Tangibles: Physical, Manual &#8226; Mechanisms: Proficiency
+    </div>
+    <div class="box" style="left: 4.80in; top: 3.15in; width: 1.50in; height: 1.10in;">
+      <span class="num">3</span><div class="hd">Talents &#8212; Doing</div>Physically, Manually
+    </div>
+    <div class="box" style="left: 4.55in; top: 5.75in; width: 1.75in; height: 1.10in;">
+      <span class="num">4</span><div class="hd">Talents &#8212; Developing</div>By Designing / Building
+    </div>
+    <div class="box" style="left: 2.55in; top: 6.30in; width: 1.40in; height: 0.90in;">
+      <span class="num">5</span><div class="hd">Talents &#8212; Creating</div>By Imagining
+    </div>
+    <div class="box" style="left: 0.20in; top: 5.75in; width: 1.75in; height: 1.10in;">
+      <span class="num">6</span><div class="hd">Natural Relating Style</div>Influencer, Motivator &#8226; Solo
+    </div>
+    <div class="box" style="left: 0.20in; top: 3.15in; width: 1.50in; height: 1.10in;">
+      <span class="num">7</span><div class="hd">Recognition Factor</div>Audiences, Viewers, Listeners
+    </div>
+    <div class="box" style="left: 0.20in; top: 0.30in; width: 1.75in; height: 1.30in;">
+      <span class="num">8</span><div class="hd">Motivating Situations</div>Goal, Objective &#8226; Social &#8226; Group, Team &#8226; Travel &#8226; Creative &#8226; Outdoors
+    </div>
+  </div>
+  <div class="footer">Smyth&ensp;6</div>
+</section>
+
+<!-- PAGE 7 — PERSONAL STATEMENT (opener, markers 1-9) -->
+<section class="page ps">
+  <h1>Personal Statement</h1>
+  <div class="ps-sub">I AM: A Builder and Developer of Creative Projects</div>
+
+  <p>I like to put together the various parts of a creative project.&nbsp;<span class="mk">(1)</span> And I love developing skills that facilitate my ability to build creative projects. This natural inclination showed up early in life. I remember having a very vivid imagination and could entertain myself for hours with drawing or building forts. I enjoyed using my hands and imagination to create.&nbsp;<span class="mk">(2)</span> I built with Lego and Kenex as a kid; I followed the directions with Lego but built creatively whatever I wanted with Kenex.&nbsp;<span class="mk">(3)</span> I still get a kick out of seeing a finished product result from my creative efforts.</p>
+
+  <p>I&#8217;ve always been drawn to visual material&#8202;&#8212;&#8202;colours, design, drawing. In grade&nbsp;3 I wrote a book about a travelling bear and drew all the pictures; my teacher had it laminated and bound so future students could read it. In grade&nbsp;5, my painting of a building was chosen for display in the mayoral office of Victoria. Grade&nbsp;12 was the first and only time I took an art class and made two distinct pieces that were particularly good.&nbsp;<span class="mk">(4)</span> I enjoy subject matter that is visual in nature, including the dynamics of form, line, colour, and contrast.</p>
+
+  <p>But I was especially drawn to movies. I made my first movie at 6 or 7&nbsp;y.o. with my dad behind the camera because I was too young to operate it; I told him what to shoot and how to narrate it. At 8&nbsp;y.o. I made &#8220;The Wild Adventures of Sheriff Jane&#8221;, starring my sister, younger cousins, and grandparents. My grandma entered it into a local film festival for fun when I was 12 and it won audience favourite. I didn&#8217;t have a script but I knew what every scene should look like before we shot it. I made all the props&#8202;&#8212;&#8202;a stagecoach, bank teller bars.&nbsp;<span class="mk">(5)</span> I got my family into their &#8220;costumes&#8221; and blocked the scene before I rolled the camera. I liked seeing my vision come to life.&nbsp;<span class="mk">(6)</span></p>
+
+  <p>This was me in action. When I have a vision for a project, I can approach it from multiple angles then jump right in and get my hands on whatever materials or processes I need to make that vision into a finished product. I went on to make many small films through my teens; in grade&nbsp;9 I discovered the Victoria Film Festival had a youth category and would make at least three short films that showed over my high-school years, doing most of the creative and production work, including editing&#8202;&#8212;&#8202;my favourite activity.&nbsp;<span class="mk">(7)</span> I have a knack for developing my creative projects by giving the thing its shape or form.</p>
+
+  <p>These early years reveal my motivational pattern. I thrive in an open-ended environment that inspires creativity, where people focus their energy on producing distinctive and unique objects or ideas.&nbsp;<span class="mk">(8)</span> I respond to a clearly defined or predetermined end, whether the goal is set by me or others. I loved making people laugh; I enjoyed being funny &#8220;on the fly&#8221;.&nbsp;<span class="mk">(9)</span> I liked being in front of an audience&#8202;&#8212;&#8202;making speeches, being on stage, presentations of any kind. I like to influence and motivate others.</p>
+
+  <div class="footer">Smyth&ensp;7</div>
+</section>
+
+<!-- PAGE 8 — PERSONAL STATEMENT (continuation, markers 10-16) -->
+<section class="page ps">
+  <div class="cont-head">Personal Statement &#8212; continued</div>
+
+  <p>Although I performed in many of my high school&#8217;s musicals and plays from grades&nbsp;10&#8211;12, my favourite drama project was The Laramie Project in Grade&nbsp;11. It felt fun to build something with a group, to run lines, take directors&#8217; notes, make it as good as we could.&nbsp;<span class="mk">(10)</span> I really enjoy working with and through groups of people.</p>
+
+  <p>My mom put my sister and I in camp when we were 9 and 11. I found a community there that would keep me going back until I was old enough to work there.&nbsp;<span class="mk">(11)</span> I do best when there is some freedom to talk, interact, make new friends. But also the outdoors.&nbsp;<span class="mk">(12)</span> Because I like to do things physically and manually, the outdoors makes it easier to use my physical abilities.</p>
+
+  <p>The camp experience let me test my mettle as a young kid. I liked feeling proficient at survival activities&#8202;&#8212;&#8202;making shelters, building fires, orienteering, feeling physically challenged.&nbsp;<span class="mk">(13)</span> I love to develop my knowledge or skill to proficiency then demonstrate competency by solving problems, producing results, or advising others.</p>
+
+  <p>The summer I was&nbsp;16, we went on a 25-day out-trip kayaking the Gulf Islands, canoeing the Campbell Lake system, hiking to the peak of Mt.&nbsp;Elkhorn. We relied on each other through deep and desperate moments, navigating not just the land but our own emotional teenage landscapes.&nbsp;<span class="mk">(14)</span> I function best within a group, team, or organization that I identify with, or that shares my values.</p>
+
+  <p>I really do like to explore and break through the existing limits of my experience, and travelling allows for that. Driving to Arizona and back in less than a week with my best friend at&nbsp;23 in 2012 was a highlight; it felt like adventure, seeing places we&#8217;d never seen. It felt like freedom.&nbsp;<span class="mk">(15)</span></p>
+
+  <p>Maybe I&#8217;m usually happiest going solo, completely in charge, making all the decisions. I felt brave to be alone, tough and capable.&nbsp;<span class="mk">(16)</span> As a creative person, I am resourceful and self-contained and find that creativity increases with freedom. I&#8217;m at another crossroads now and need to recover that sense of adventure&#8202;&#8212;&#8202;the freedom that comes with using my talents and proficiencies to explore and build and develop a creative project.</p>
+
+  <div class="footer">Smyth&ensp;8</div>
+</section>
+
+</body></html>

@@ -1,0 +1,1 @@
+Page 8 feels short — the seven continuation paragraphs occupy less than half the available page, leaving a long blank tail below the final paragraph that reads as an unplanned white space rather than a designed coda.
