@@ -28,7 +28,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Numeral discipline declared in the colophon:
+/* Numeral discipline:
    - Old-style, proportional numerals everywhere in running prose.
    - Lining, tabular numerals held strictly for folios and TOC page-numbers.
    - Chapter and definition markers use Roman numerals (i-vi, I-VII) to stay
@@ -193,64 +193,6 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink-mute);
 }
 .cover .foot .pg { font-variant-numeric: lining-nums tabular-nums; }
-
-/* ---------- TITLE / COLOPHON ---------- */
-.title-page {
-  display: grid;
-  grid-template-columns: 2.4in 1fr;
-  grid-template-rows: 1fr auto;
-  gap: 0 32pt;
-}
-.title-page .label {
-  font-family: "Inter", sans-serif;
-  font-size: 7.5pt;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  color: var(--ink-mute);
-  margin-bottom: 13pt;
-}
-.title-page .block { align-self: end; }
-.title-page h1 {
-  font-family: "Source Serif 4", serif;
-  font-weight: 400;
-  font-size: 40pt;
-  line-height: 48pt;
-  letter-spacing: -0.018em;
-  color: var(--ink);
-  margin: 0 0 26pt 0;
-  max-width: 5.2in;
-}
-.title-page h1 em { color: var(--accent); font-style: italic; white-space: nowrap; }
-.title-page .colophon {
-  grid-column: 1 / -1;
-  margin-top: 72pt;
-  display: grid;
-  grid-template-columns: 1.6in 1fr 1.6in;
-  gap: 26pt;
-  font-family: "Inter", sans-serif;
-  font-size: 8pt;
-  line-height: 13pt;
-  color: var(--ink-body);
-  border-top: 0.75pt solid var(--ink);
-  padding-top: 13pt;
-}
-.title-page .colophon h3 {
-  font-size: 7.25pt;
-  letter-spacing: 0.22em;
-  text-transform: uppercase;
-  font-weight: 500;
-  color: var(--ink-mute);
-  margin: 0 0 6.5pt 0;
-}
-.title-page .colophon p { font-size: 8.5pt; line-height: 13pt; }
-.title-page .colophon .accent-swatch {
-  display: inline-block;
-  width: 10px; height: 10px;
-  background: var(--accent);
-  vertical-align: middle;
-  margin-right: 0.6em;
-  transform: translateY(-1px);
-}
 
 /* ---------- TOC ---------- */
 .toc-page .toc-head {
@@ -966,7 +908,7 @@ a { color: inherit; text-decoration: none; }
 </section>
 
 <!-- 4. ELEMENTS OPENER -->
-<section class="page elements-page">
+<section class="page verso elements-page">
   <div class="chapter-mark">
     <span class="chapter-num">Chapter II</span>
     <span class="rule"></span>
@@ -985,6 +927,8 @@ a { color: inherit; text-decoration: none; }
     <div class="left">Six terms</div>
     <div class="right">Natural Talents, Preferred Subject Matter, Motivating Situations, and Natural Relating Style together serve <em>Essential Motivation</em>. The last, What You Do Next, belongs to you.</div>
   </div>
+
+  <div class="folio verso">Sample<span class="sep"></span>04</div>
 </section>
 
 <!-- 4b. ELEMENTS LIST -->
