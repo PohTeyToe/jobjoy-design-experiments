@@ -272,11 +272,18 @@ a { color: inherit; text-decoration: none; }
 }
 
 /* ---------- HOW TO READ ---------- */
-/* Measure target: 10.5pt Source Serif 4, ~5.4pt average char width -> 4.5in ≈ 60 CPL */
+/* Page-level padding pinned here so the grid geometry stays the same on
+   either parity (verso/recto) — round-1 colophon deletion flipped this page
+   from verso to recto, and inheriting from the global .recto rule was
+   leaving the body squeezed in critic screenshots. Mirror .ps-cont's
+   2.25in / 1fr split so the body column is the same width as the PS
+   continuation pages, which we know read at the right measure. */
 .how-page {
+  padding: 0.75in 1in;
   display: grid;
-  grid-template-columns: 1.85in 1fr;
-  gap: 32pt;
+  grid-template-columns: 2in 1fr;
+  gap: 36pt;
+  align-items: start;
 }
 .how-page .side {
   border-top: 0.75pt solid var(--ink);
@@ -307,13 +314,13 @@ a { color: inherit; text-decoration: none; }
   color: var(--ink-mute);
 }
 .how-page .body {
-  max-width: 4.55in;      /* targets ~62-66 CPL at 10.5pt Source Serif 4 */
   border-top: 0.75pt solid var(--ink);
   padding-top: 13pt;
+  min-width: 0;            /* defeat min-width: auto so the grid column wins */
 }
 .how-page .body p {
-  font-size: 10.5pt;
-  line-height: 15.5pt;
+  font-size: 11.5pt;
+  line-height: 17pt;
   color: var(--ink-body);
   text-align: left;
   hyphens: auto;
@@ -597,8 +604,8 @@ a { color: inherit; text-decoration: none; }
 .ps-opener .body .rule { height: 0.5pt; background: var(--ink); width: 4.3in; margin-bottom: 13pt; }
 .ps-opener .body p {
   font-family: "Source Serif 4", serif;
-  font-size: 10.5pt;
-  line-height: 15.5pt;
+  font-size: 11.5pt;
+  line-height: 17pt;
   color: var(--ink-body);
   max-width: 4.5in;
   text-align: left;
@@ -638,8 +645,8 @@ a { color: inherit; text-decoration: none; }
 .ps-cont .body { max-width: 4.5in; }
 .ps-cont .body p {
   font-family: "Source Serif 4", serif;
-  font-size: 10.5pt;
-  line-height: 15.5pt;
+  font-size: 11.5pt;
+  line-height: 17pt;
   color: var(--ink-body);
   text-align: left;
   hyphens: auto;
@@ -647,7 +654,7 @@ a { color: inherit; text-decoration: none; }
   orphans: 3;
   font-variant-numeric: oldstyle-nums proportional-nums;
 }
-.ps-cont .body p + p { margin-top: 11pt; }
+.ps-cont .body p + p { margin-top: 12pt; }
 .ps-cont .body .coda {
   margin-top: 26pt;
   padding-top: 13pt;
@@ -704,13 +711,17 @@ a { color: inherit; text-decoration: none; }
 }
 .def-list li {
   font-family: "Source Serif 4", serif;
-  font-size: 8.75pt;
-  line-height: 11.5pt;
+  font-size: 9.75pt;
+  line-height: 14.5pt;
   color: var(--ink-body);
-  padding: 4.5pt 0;
-  border-bottom: 0.25pt solid color-mix(in oklch, var(--ink) 22%, transparent);
+  padding: 6pt 0;
 }
-.def-list li:last-child { border-bottom: none; }
+/* Visible space between (n) marker and lemma — round-2 fix for the (1)Building
+   collision flagged by the UX critic. Pairs with the same marker spacing in
+   the PS body, where the &thinsp; entity already provides separation. */
+.def-list li .marker {
+  margin-right: 0.45em;
+}
 .def-list li strong {
   font-weight: 600;
   color: var(--ink);
@@ -852,7 +863,7 @@ a { color: inherit; text-decoration: none; }
     </li>
     <li>
       <span class="num">II.</span>
-      <span class="title">Elements of Key Success Factors</span>
+      <span class="title">Elements of Your Key Success Factors</span>
       <span class="desc">Six definitions in their order of use</span>
       <span class="pg">05</span>
     </li>
@@ -990,9 +1001,9 @@ a { color: inherit; text-decoration: none; }
   <div class="running-head verso">Chapter III · Individual Passion Pattern</div>
 
   <div class="head">
-    <span class="accent">Chapter III</span>
+    <span class="accent">Plate I</span>
     <h2>Your <em>Individual Passion Pattern</em>.</h2>
-    <span>Plate I</span>
+    <span>IPP</span>
   </div>
 
   <div class="ipp-wrap">
@@ -1119,7 +1130,7 @@ a { color: inherit; text-decoration: none; }
 
   <div class="body ps-body">
     <h2>Personal <em>Statement.</em></h2>
-    <div class="subhead"><span class="iam">I am&nbsp;:</span> A builder &amp; developer of creative projects.</div>
+    <div class="subhead"><span class="iam">I am&nbsp;:</span> A builder and developer of creative projects.</div>
     <div class="rule"></div>
     <p>I like to put together the various parts of a creative project. <span class="marker">(1)</span>&#8201;And I love developing skills that facilitate my ability to build creative projects. This natural inclination showed up early in life.</p>
     <p>I remember having a very vivid imagination and could entertain myself for hours with drawing or building forts. I could draw dinosaurs and played Robin Hood and cowboys. I enjoyed using my hands and imagination to create. <span class="marker">(2)</span>&#8201;For example, I built with Lego and Kenex as a kid. I usually would follow the directions in the Lego box to build the design on the box. I found it more enjoyable to follow the instruction with Lego but would build creatively whatever I wanted with Kenex. <span class="marker">(3)</span>&#8201;I have enjoyed building with Lego and Kenex as an adult but less as a regular hobby and more of a nostalgic good time &mdash; but I still get a kick out of seeing a finished product result from my creative efforts.</p>
